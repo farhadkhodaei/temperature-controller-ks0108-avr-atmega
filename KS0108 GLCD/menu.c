@@ -2,7 +2,7 @@
 This program was created by the
 CodeWizardAVR V3.12 Advanced
 Automatic Program Generator
-© Copyright 1998-2014 Pavel Haiduc, HP InfoTech s.r.l.
+Â© Copyright 1998-2014 Pavel Haiduc, HP InfoTech s.r.l.
 http://www.hpinfotech.com
 
 Project : 
@@ -1726,20 +1726,7 @@ TWCR=(0<<TWEA) | (0<<TWSTA) | (0<<TWSTO) | (0<<TWEN) | (0<<TWIE);
 // Graphic Display Controller initialization
 // The KS0108 connections are specified in the
 // Project|Configure|C Compiler|Libraries|Graphic Display menu:
-// DB0 - PORTC Bit 0
-// DB1 - PORTC Bit 1
-// DB2 - PORTC Bit 2
-// DB3 - PORTC Bit 3
-// DB4 - PORTA Bit 4
-// DB5 - PORTA Bit 5
-// DB6 - PORTA Bit 6
-// DB7 - PORTA Bit 7
-// E - PORTA Bit 2
-// RD /WR - PORTA Bit 1
-// RS - PORTA Bit 0
-// /RST - PORTD Bit 6
-// /CS1 - PORTD Bit 4
-// /CS2 - PORTD Bit 5
+
 
 // Specify the current font for displaying text
 glcd_init_data.font=font5x7;
