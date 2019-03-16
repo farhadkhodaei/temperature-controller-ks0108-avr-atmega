@@ -1587,7 +1587,6 @@ char menu(char menu_num)
         glcd_rectround(0, 0, 39, 64, 10);
 
         deselect_all(&btn1);
-        select_btn(&btn1);
         show_buttons(&btn1, menu_num); 
         return func(menu_num, &btn1);
         
