@@ -1455,7 +1455,7 @@ void show_buttons(struct button * btn, char menu_num)
      
 char func(char menu_num, struct button * btn)
 {
-   struct button * btn1,* btn2, * btn3;
+   struct button * btn1;
    unsigned long int wait_finish_menu = 0;
    bit statechanged = 0, showed = 0;
    btn1 = btn;
@@ -1555,11 +1555,6 @@ char menu(char menu_num)
 {   
    struct button btn1;
    struct button btn2;
-   struct button btn3;
-   struct button btn4;
-   struct button btn5;
-   struct button btn6;
-   struct button btn7;
    
    switch (menu_num)
    {
@@ -1569,7 +1564,6 @@ char menu(char menu_num)
         btn1.prev_btn = &btn1;
         btn1.picforselected = plus_selected;
         btn1.picforunselected = plus_unselected;
-        btn1.action =  MENU_1;
         btn1.x1 = 5;
         btn1.y1 = 5;
         
@@ -1577,7 +1571,6 @@ char menu(char menu_num)
         btn2.prev_btn = &btn1;
         btn2.picforselected = minus_selected;
         btn2.picforunselected = minus_unselected;
-        btn2.action =  MENU_2;
         btn2.x1 = 5;
         btn2.y1 = 32;
         
@@ -1614,7 +1607,6 @@ void main(void)
 {
 // Declare your local variables here
 char menu_n;
-unsigned int i=0;
 // Variable used to store graphic display
 // controller initialization data
 GLCDINIT_t glcd_init_data;
@@ -1739,7 +1731,7 @@ glcd_init_data.writexmem=NULL;
 
 glcd_init(&glcd_init_data);
 menu_n = MENU_2;
-PORTC |= 0x0F;
+PORTC |= 0x03;
 while (1)
       {
       // Place your code here
