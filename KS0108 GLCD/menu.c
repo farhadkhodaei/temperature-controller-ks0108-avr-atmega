@@ -28,9 +28,7 @@ Data Stack size         : 256
  
 #define MENU_1 1
 #define MENU_2 2
-#define NO_ACC 0
-#define EN_MENU_ACC 1
-#define FA_MENU_ACC 2
+
 // Font used for displaying text
 // on the graphic display
 #include <font5x7.h>
