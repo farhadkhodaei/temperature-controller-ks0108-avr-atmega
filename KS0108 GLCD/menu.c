@@ -1455,22 +1455,15 @@ char func(char menu_num, struct button * btn)
 {
    struct button * btn1;
    unsigned long int wait_finish_menu = 0;
-   bit statechanged = 0, showed = 0;
    btn1 = btn;
    shownum(desired_temp, 'R');
    while(1)
    {
-      if (PINC.0 && PINC.1 && showed)
-      {
-          showed = 0;
-          statechanged = 0;
-      }
       if(PINC.0 == 0)
       {
           if(btn1->selected == false)
           {
              btn1->selected = true;
-             statechanged = 1;
              desired_temp++;
              if(desired_temp>33)desired_temp=33;
              show_buttons(btn1, menu_num);
@@ -1484,7 +1477,6 @@ char func(char menu_num, struct button * btn)
           if((btn1->next_btn)->selected == false)
           {
              (btn1->next_btn)->selected = true; 
-             statechanged = 1;
              desired_temp--;
              if(desired_temp<10)desired_temp=10;
              show_buttons(btn1, menu_num);
@@ -1498,7 +1490,6 @@ char func(char menu_num, struct button * btn)
           if(btn1->selected == true)
           {
               btn1->selected = false; 
-              statechanged = 1;
               show_buttons(btn1, menu_num);
           }
       }
@@ -1507,13 +1498,8 @@ char func(char menu_num, struct button * btn)
           if((btn1->next_btn)->selected == true)
           {
              (btn1->next_btn)->selected = false;
-             statechanged = 1;
              show_buttons(btn1, menu_num);
           }
-      }
-      if (statechanged && !showed)
-      {
-          showed = 1;
       }
       temp_control();        
       delay_ms(30);
