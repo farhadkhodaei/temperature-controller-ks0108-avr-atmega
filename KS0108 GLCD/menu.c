@@ -1447,19 +1447,17 @@ void show_button(struct button * btn, char menu_num)
 }     
 char func(char menu_num, struct button * btn)
 {
-   struct button * btn1;
    unsigned long int wait_finish_menu = 0;
-   btn1 = btn;
    while(1)
    {
       if(PINC.0 == 0)
       {
-          if(btn1->selected == false)
+          if(btn->selected == false)
           {
-             btn1->selected = true;
+             btn->selected = true;
              desired_temp++;
              if(desired_temp>33)desired_temp=33;
-             show_button(btn1, menu_num);
+             show_button(btn, menu_num);
              shownum(desired_temp, 'R');
           }
           wait_finish_menu = 0;
@@ -1467,12 +1465,12 @@ char func(char menu_num, struct button * btn)
       }
       if (PINC.1 == 0)
       {     
-          if((btn1->next_btn)->selected == false)
+          if((btn->next_btn)->selected == false)
           {
-             (btn1->next_btn)->selected = true; 
+             (btn->next_btn)->selected = true; 
              desired_temp--;
              if(desired_temp<10)desired_temp=10;
-             show_button(btn1->next_btn, menu_num);
+             show_button(btn->next_btn, menu_num);
              shownum(desired_temp, 'R');
           }
           wait_finish_menu = 0;
@@ -1480,18 +1478,18 @@ char func(char menu_num, struct button * btn)
       }
       if(PINC.0 == 1)
       {
-          if(btn1->selected == true)
+          if(btn->selected == true)
           {
-              btn1->selected = false; 
-              show_button(btn1, menu_num);
+              btn->selected = false; 
+              show_button(btn, menu_num);
           }
       }
       if (PINC.1 == 1)
       {     
-          if((btn1->next_btn)->selected == true)
+          if((btn->next_btn)->selected == true)
           {
-             (btn1->next_btn)->selected = false;
-             show_button(btn1->next_btn, menu_num);
+             (btn->next_btn)->selected = false;
+             show_button(btn->next_btn, menu_num);
           }
       }
       temp_control();        
