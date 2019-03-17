@@ -1399,21 +1399,21 @@ void shownum(int num, char position)
 }
 void deselect_all(struct button * btn)
 {
-   struct button * btn1, *btn2;
-   btn1 = btn;
+   struct button * bt1, *bt2;
+   bt1 = btn;
    do{          
-     btn1->selected = false;
-     btn1->next_btn->selected=false;
-     btn1->prev_btn->selected=false;
-     btn2=btn1;
-     btn1 = btn1->next_btn;
-   }while(btn1!=btn2);
+     bt1->selected = false;
+     bt1->next_btn->selected=false;
+     bt1->prev_btn->selected=false;
+     bt2=bt1;
+     bt1 = bt1->next_btn;
+   }while(bt1!=bt2);
 } 
 void select_btn(struct button * btn)
 {
    btn->selected = true;
 } 
-void show_buttons(struct button * btn, char menu_num)
+void show_allbuttons(struct button * btn, char menu_num)
 {
    struct button * bt1, * bt2;
    bt1 = btn;
@@ -1430,33 +1430,26 @@ void show_buttons(struct button * btn, char menu_num)
      }
      bt2=bt1;
      bt1 = bt1->next_btn;
-   }while(bt1!=bt2);
-   bt1=btn->prev_btn;
-   do{ 
-     if (bt1->selected == true)
+   }while(bt1!=bt2);    
+}
+void show_button(struct button * btn, char menu_num)
+{
+   if (btn->selected == true)
      {
-        glcd_putimagef(bt1->x1, bt1->y1, blank, GLCD_PUTAND);
-        glcd_putimagef(bt1->x1, bt1->y1, bt1->picforselected, GLCD_PUTOR);
+        glcd_putimagef(btn->x1, btn->y1, blank, GLCD_PUTAND);
+        glcd_putimagef(btn->x1, btn->y1, btn->picforselected, GLCD_PUTOR);
      }
      else
      {
-        glcd_putimagef(bt1->x1, bt1->y1, blank, GLCD_PUTAND);
-        glcd_putimagef(bt1->x1, bt1->y1, bt1->picforunselected, GLCD_PUTOR);
+        glcd_putimagef(btn->x1, btn->y1, blank, GLCD_PUTAND);
+        glcd_putimagef(btn->x1, btn->y1, btn->picforunselected, GLCD_PUTOR);
      }
-     bt2=bt1;
-     bt1 = bt1->prev_btn;
-   }while(bt1!=bt2);
-   
-    
-}
-
-     
+}     
 char func(char menu_num, struct button * btn)
 {
    struct button * btn1;
    unsigned long int wait_finish_menu = 0;
    btn1 = btn;
-   shownum(desired_temp, 'R');
    while(1)
    {
       if(PINC.0 == 0)
@@ -1466,7 +1459,7 @@ char func(char menu_num, struct button * btn)
              btn1->selected = true;
              desired_temp++;
              if(desired_temp>33)desired_temp=33;
-             show_buttons(btn1, menu_num);
+             show_button(btn1, menu_num);
              shownum(desired_temp, 'R');
           }
           wait_finish_menu = 0;
@@ -1479,7 +1472,7 @@ char func(char menu_num, struct button * btn)
              (btn1->next_btn)->selected = true; 
              desired_temp--;
              if(desired_temp<10)desired_temp=10;
-             show_buttons(btn1, menu_num);
+             show_button(btn1->next_btn, menu_num);
              shownum(desired_temp, 'R');
           }
           wait_finish_menu = 0;
@@ -1490,7 +1483,7 @@ char func(char menu_num, struct button * btn)
           if(btn1->selected == true)
           {
               btn1->selected = false; 
-              show_buttons(btn1, menu_num);
+              show_button(btn1, menu_num);
           }
       }
       if (PINC.1 == 1)
@@ -1498,7 +1491,7 @@ char func(char menu_num, struct button * btn)
           if((btn1->next_btn)->selected == true)
           {
              (btn1->next_btn)->selected = false;
-             show_buttons(btn1, menu_num);
+             show_button(btn1->next_btn, menu_num);
           }
       }
       temp_control();        
@@ -1562,9 +1555,9 @@ char menu(char menu_num)
         glcd_putimagef(48,3,settemp, GLCD_PUTOR);
         glcd_rectround(40, 0, 87, 64, 0); 
         glcd_rectround(0, 0, 39, 64, 10);
-
+        shownum(desired_temp, 'R');
         deselect_all(&btn1);
-        show_buttons(&btn1, menu_num); 
+        show_allbuttons(&btn1, menu_num); 
         return func(menu_num, &btn1);
         
         
