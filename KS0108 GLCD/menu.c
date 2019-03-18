@@ -76,8 +76,6 @@ flash unsigned char blank[]=
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
 #endif
 };
-
-
 flash unsigned char blankbig[]=
 {
 /* Image width: 60 pixels */
@@ -259,8 +257,6 @@ flash unsigned char n0[]=
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
 #endif
 };
-
-
 flash unsigned char n1[]=
 {
 /* Image width: 32 pixels */
@@ -651,8 +647,6 @@ flash unsigned char n5[]=
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
 #endif
 };
-
-
 flash unsigned char n6[]=
 {
 /* Image width: 32 pixels */
@@ -809,7 +803,6 @@ flash unsigned char n7[]=
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
 #endif
 };
-
 flash unsigned char n8[]=
 {
 /* Image width: 32 pixels */
@@ -888,7 +881,6 @@ flash unsigned char n8[]=
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
 #endif
 };
-
 flash unsigned char n9[]=
 {
 /* Image width: 32 pixels */
@@ -967,8 +959,6 @@ flash unsigned char n9[]=
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
 #endif
 };
-
-
 flash unsigned char minus_selected[]=
 {
 /* Image width: 28 pixels */
@@ -1006,8 +996,6 @@ flash unsigned char minus_selected[]=
 0x00, 0x00, 0x00, 0x00, 
 #endif
 };
-
-
 flash unsigned char minus_unselected[]=
 {
 /* Image width: 28 pixels */
@@ -1045,9 +1033,6 @@ flash unsigned char minus_unselected[]=
 0x00, 0x00, 0x00, 0x00, 
 #endif
 };
-
-
-
 flash unsigned char plus_selected[]=
 {
 /* Image width: 28 pixels */
@@ -1136,7 +1121,6 @@ flash unsigned char plus_unselected[]=
 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
 #endif
 };
-
 flash unsigned char settemp[]=
 {
 /* Image width: 89 pixels */
@@ -1195,8 +1179,6 @@ flash unsigned char settemp[]=
 0x00, 0x00, 
 #endif
 };
-
-
 flash unsigned char menu2[]=
 {
 /* Image width: 126 pixels */
@@ -1299,10 +1281,7 @@ flash unsigned char menu2[]=
 0x00, 0x00, 
 #endif
 };
-
-
 flash unsigned char * nums[10]={n0,n1,n2,n3,n4,n5,n6,n7,n8,n9};
-
 // Declare your global variables here
 typedef struct button {
   struct button * next_btn;
@@ -1350,7 +1329,6 @@ void shownum(int num, char position)
        glcd_putimagef(34+28,3,nums[i2], GLCD_PUTOR);
        break;
     } 
-    
 }
 void deselect_all(struct button * btn)
 {
@@ -1416,7 +1394,6 @@ char func(char menu_num, struct button * btn)
              shownum(desired_temp, 'R');
           }
           wait_finish_menu = 0;
-         
       }
       if (PINC.1 == 0)
       {     
@@ -1429,7 +1406,6 @@ char func(char menu_num, struct button * btn)
              shownum(desired_temp, 'R');
           }
           wait_finish_menu = 0;
-         
       }
       if(PINC.0 == 1)
       {
@@ -1474,22 +1450,18 @@ char func2(void)
          if(tm>99)tm=99;
          current_temp = tm;
          shownum(tm, 'C');
-         
       }
       temp_control();
       delay_ms(30); 
    }
-     
 }   
 char menu(char menu_num)
 {   
    struct button btn1;
    struct button btn2;
-   
    switch (menu_num)
    {
       case MENU_1:
-        
         btn1.next_btn = &btn2;
         btn1.prev_btn = &btn1;
         btn1.picforselected = plus_selected;
@@ -1512,25 +1484,14 @@ char menu(char menu_num)
         deselect_all(&btn1);
         show_allbuttons(&btn1, menu_num); 
         return func(menu_num, &btn1);
-        
-        
-      
       break;
-      
       case MENU_2:
         glcd_clear();
         glcd_putimagef(1,1,menu2, GLCD_PUTOR);
         glcd_rectround(0, 0, 127, 64, 0); 
         return func2();
-        
-        
-       
-      
-      
       break;
    }
-   
-   
 }
    
 void main(void)
@@ -1658,7 +1619,6 @@ glcd_init_data.readxmem=NULL;
 // No function is used for writing
 // image data to external memory
 glcd_init_data.writexmem=NULL;
-
 glcd_init(&glcd_init_data);
 menu_n = MENU_2;
 PORTC |= 0x03;
@@ -1666,6 +1626,5 @@ while (1)
       {
       // Place your code here
         menu_n = menu(menu_n);
-        
       }
 }
