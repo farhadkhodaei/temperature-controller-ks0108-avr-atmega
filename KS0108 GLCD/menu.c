@@ -1308,8 +1308,8 @@ return ADCH;
 }
 void temp_control(void)
 {
-     if(current_temp>desired_temp)PORTC.4=1;
-     if(current_temp<desired_temp)PORTC.4=0;
+     if(current_temp>desired_temp)PORTC.4=1;  // Turn the cooler relay ON
+     if(current_temp<desired_temp)PORTC.4=0;  // Turn the cooler relay OFF
 }
 void shownum(int num, char position)
 {
